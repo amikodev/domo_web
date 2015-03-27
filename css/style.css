@@ -1,0 +1,320 @@
+
+
+@font-face{
+    font-family: "Runic AltNo";
+    font-style: normal;
+    src: url(../fonts/runic_altno.ttf); /*if IE */
+    src: local("Grandesign Regular"), url("../fonts/runic_altno.ttf") format("truetype"); /* non-IE */
+}
+
+#logo{
+	font-size: 400%;
+    color: #F00;
+    text-align: right;
+    font-family: "Runic AltNo";
+}
+#logo a{
+    color: #F00;
+    text-decoration: none;
+}
+
+.device.type_DEV_LED .image img{
+/*    width: 64px;
+    height: 64px;*/
+    cursor: pointer;
+}
+.device.type_DEV_LED .action{
+    display: none;
+}
+
+
+/*.device.type_DEV_BUTTON .image img{
+    width: 64px;
+    height: 64px;
+}
+
+.device.type_DEV_MOVESENSOR .image img{
+    width: 64px;
+    height: 64px;
+}*/
+
+.device.type_DEV_RELE .image img{
+/*    width: 64px;
+    height: 64px;*/
+    cursor: pointer;
+}
+.device.type_DEV_RELE .action{
+    display: none;
+}
+
+
+
+
+/*.device.type_DEV_TEMPERATURESENSOR .image{
+
+}
+.device.type_DEV_TEMPERATURESENSOR .image img{
+    width: 64px;
+    height: 64px;
+}*/
+.device.type_DEV_TEMPERATURESENSOR .value{
+    font-size: 20px;
+}
+.device.type_DEV_TEMPERATURESENSOR .value span{
+    font-size: 25px;
+}
+.device.type_DEV_TEMPERATURESENSOR .action{
+    clear: both;
+}
+
+
+
+/*.device.type_DEV_MAGNETOSENSOR .image img{
+    width: 64px;
+    height: 64px;
+}
+
+.device.type_DEV_VIBROSENSOR .image img{
+    width: 64px;
+    height: 64px;
+}*/
+
+.device .image img{
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/* <scene> */
+
+#scene_container{
+    position: relative;
+    width: 100%;
+    height: 700px;
+    overflow: auto;
+    z-index1: -1;
+}
+#scene_container #scene_image{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#scene_container #scene_devices{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#scene_container #scene_devices .item{
+    position: absolute;
+    border1: 1px #FFF solid;
+    background-color1: #FFF;
+    padding: 5px;
+    min-width: 20px;
+    text-align: center;
+    color: #000;
+}
+#scene_container #scene_devices .item .delete{
+    color: #B00;
+    margin-top: 5px;
+    cursor: pointer;
+    z-index1: 100;
+    position: relative;
+    display: block;
+    text-align: left;
+}
+#scene_container #scene_devices .item .background{
+    border: 1px #FFF solid;
+    background-color: #DDD;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    opacity: .7;
+}
+#scene_container #scene_devices .item .device{
+    z-index: 100;
+    position: relative;
+    display: block;
+    
+    
+}
+/*
+#scene_container #scene_devices .item .device:before{
+    content: "";
+    position: absolute;
+    display: block;
+    background-color: red;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0.5;
+    z-index: 1;
+}
+*/
+/* </scene> */
+
+/* <deviceList> */
+#deviceList{
+    
+}
+#deviceList .item{
+    border: 1px #BBB solid;
+    padding: 5px;
+    margin-bottom: 3px;
+    z-index: 100;
+    background-color: #FFF;
+}
+
+
+/* </deviceList> */
+
+
+
+/* <log> */
+#log{
+    border-right: 1px solid #999; 
+    border-bottom: 1px solid #999; 
+    border-top: 1px solid #BBB; 
+    border-left: 1px solid #BBB; 
+    background-color: #EEE; 
+    font-family: 'Courier New'; 
+    color: #000; 
+    padding: 5px; 
+    overflow: auto;
+}
+#log p{
+    
+}
+#log p.rabbitmq{
+    color: #999900;
+}
+
+/* </log> */
+
+
+/* <plugins> */
+
+#pluginContainer{
+    width: 200px; 
+    position: absolute; 
+    top: -25px; 
+    left: 32px; 
+    background-color: #EEE; 
+    padding: 5px 5px 0 5px; 
+    z-index: 100;
+    display: none;
+    border-left1: 4px #AAA solid;
+    border: 1px #FFF solid;
+}
+#pluginContainer .item{
+    border: 1px #888 solid; 
+    margin-bottom: 5px;
+    padding: 5px;
+}
+#pluginContainer .item .caption{
+    color: #000;
+    font-weight: bold;
+    margin-left1: 20px;
+}
+#pluginContainer .item .content{
+    
+}
+
+/* </plugins> */
+
+
+/* <logMain> */
+ul#logMain{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 11px;
+    overflow: hidden;
+}
+ul#logMain li{
+    margin: 0;
+    padding: 0;
+    
+}
+/* <logMain> */
+
+
+
+
+/* <widgets> */
+#widgetAdd{
+    width1: 30px;
+    height1: 30px;
+    border: 2px #DDD solid;
+    background-color: #EEE;
+    font-weight: bold;
+    font-size: 30px;
+    padding: 5px;
+    float: right;
+    cursor: pointer;
+}
+#widgetIcon{
+    width1: 50px;
+    height1: 50px;
+    border: 1px #DDD solid;
+    background-color: #EEE;
+    padding: 5px;
+    cursor: move;
+    float: left;
+}
+
+#widgetParams{
+    display1: none;
+}
+
+#widgetParams input, #widgetParams select, #widgetParams textarea{
+    width: 100%;
+}
+
+#scene_container #scene_widgets .item{
+    position: absolute;
+    cursor: pointer;
+}
+
+/* </widgets> */
+
+
+/* <connectStatus> */
+#connectStatus{
+    width: 10px;
+    height: 30px;
+    margin1: 0 100px;
+    float: right;
+    margin: -15px 0 0 0;
+}
+#connectStatus[data-status="1"]{
+    background-color: #009900;
+}
+#connectStatus[data-status="0"]{
+    background-color: #FF0000;
+}
+/* </connectStatus> */
+
+/* <certificateInfo> */
+#certificateInfo{
+    float: left;
+    font-size: 12px;
+    margin: 10px 20px;
+}
+#certificateInfo .dateEnd span.alert{
+    color: red;
+    font-weight: bold;
+}
+#certificateInfo .dateEnd span.notify{
+    color: #999900;
+    font-weight: bold;
+}
+
+/* </certificateInfo> */
+
+
+

@@ -103,13 +103,17 @@ class SiteController extends Controller{
             $deviceImages[] = $fname;
         }
         
-        $this->render('scene', array(
-            'id'=>$id,
-            'sceneModels'=>$sceneModels, 
-            'pluginModels'=>$pluginModels, 
-            'logMainModels'=>$logMainModels,
-            'deviceImages'=>$deviceImages,
-        ));
+        if(sizeof($sceneModels) > 0){
+            $this->render('scene', array(
+                'id'=>$id,
+                'sceneModels'=>$sceneModels, 
+                'pluginModels'=>$pluginModels, 
+                'logMainModels'=>$logMainModels,
+                'deviceImages'=>$deviceImages,
+            ));
+        } else{
+            $this->render('scenenotfound');
+        }
     }
     
     public function actionSceneupdate($id=null){

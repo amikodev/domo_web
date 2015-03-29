@@ -36,15 +36,22 @@ body
 #footer
 {
     padding: 30px 10px 10px 10px;
-    margin: 10px 20px;
+    margin1: 10px 20px;
+    margin-top: 10px;
     font-size1: 0.8em;
     font-family1: serif;
     text-align: center;
-    border-top: 5px solid #DDD;
-    border-bottom: 5px solid #DDD;
-    color: #000;
-    background-color: #BBB;
-    height: 120px;
+    border-top1: 5px solid #DDD;
+    border-bottom1: 5px solid #DDD;
+    color: #FFF;
+    background-color: #000;
+    height: 220px;
+
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50); /* IE 5.5+*/
+    -moz-opacity: 0.5; /* Mozilla 1.6 и ниже */
+    -khtml-opacity: 0.5; /* Konqueror 3.1, Safari 1.1 */
+    opacity: 0.5; /* CSS3 - Mozilla 1.7b +, Firefox 0.9 +, Safari 1.2+, Opera 9+ */
+
 }
 
 #logo
@@ -56,7 +63,7 @@ body
 #mainmenu
 {
     background1:white url(bg.gif) repeat-x left top;
-    background-color: #000;
+    background-color: #BBB;
 }
 
 #mainmenu ul
@@ -72,10 +79,10 @@ body
 
 #mainmenu ul li a
 {
-    color:#ffffff;
+    color: #000;
     background-color:transparent;
     font-size:12px;
-    font-weight:bold;
+    font-weight1:bold;
     text-decoration:none;
     padding:5px 8px;
 }
@@ -85,6 +92,9 @@ body
     color: #000;
     background-color:#FFF;
     text-decoration:none;
+}
+#mainmenu ul li.active a{
+    font-weight:bold;
 }
 
 div.flash-error, div.flash-notice, div.flash-success

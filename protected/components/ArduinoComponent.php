@@ -168,7 +168,7 @@ class ArduinoComponent extends CApplicationComponent{
                     $firstShmodel = $deviceModel->parent;
                     
                     $data = array();
-                    while($shmodel->type !== DEV_ARDUINO){
+                    while(intval($shmodel->type) !== DEV_ARDUINO){
                         
                         $dat = array();
                         
@@ -181,7 +181,6 @@ class ArduinoComponent extends CApplicationComponent{
                         
                         ksort($dat);
                         $hdat = sprintf("%02X", intval(base_convert(implode("", $dat), 2, 10)));
-                        
                         
                         $data[] = $hdat;
                         
@@ -196,6 +195,7 @@ class ArduinoComponent extends CApplicationComponent{
                     
                     $params = json_decode($firstShmodel->params, true);
                     krsort($data);
+                    
                     $cmd = array(CMD_SHIFT, CMD_TYPE_SHIFT_WRITE, $firstShmodel->pin, $params['clockPin'], $params['latchPin'], sizeof($data), hex2bin(implode("", $data)));
                     
                 } elseif(in_array($deviceModel->type, Yii::app()->params['inputDevices']) && $deviceModel->parent !== null && $deviceModel->parent->type == DEV_REGISTR_IN){
@@ -497,12 +497,16 @@ class ArduinoComponent extends CApplicationComponent{
         //Yii::log("<<< {$controllerModel->caption}: ".trim($content), CLogger::LEVEL_INFO, "arduino.recieve");
         //Yii::getLogger()->flush(true);
         
+        // var_dump("content: ".bin2hex($content));
+        
         $ret = array();
 
         $date = date("Y-m-d H:i:s");
 
         $ps = unpack("c*", $content);
         $ps = array_values($ps);
+        
+        if(sizeof($ps) == 0) return $ret;
 
         // собираем разбитый ответ по частям
         $fname = Yii::app()->runtimePath."/pcmd_{$controllerID}.txt";
@@ -695,10 +699,6 @@ class ArduinoComponent extends CApplicationComponent{
                 
             }
             
-        } elseif($command == CMD_REGIN){
-            
-        } elseif($command == CMD_REGOUT){
-            
         } elseif($command == CMD_NFC){
             
             $criteria = new CDbCriteria;
@@ -760,8 +760,19 @@ class ArduinoComponent extends CApplicationComponent{
         } elseif($command == CMD_RADIO){
 
             $type = $ps[1];
+            
             if($type == CMD_TYPE_RADIO_RESPONCE && strlen($content) == 32){
                 
+                //var_dump(bin2hex($content));
+                
+                $ccontent = substr($content, 0, 12).substr($content, 20, 8);
+
+                $ps = unpack("c*", $ccontent);
+                $ps = array_values($ps);
+                        
+                var_dump(bin2hex($ccontent));
+                
+                        
                 $pipe_num = $ps[2];
                 
                 $criteria = new CDbCriteria;
@@ -776,9 +787,10 @@ class ArduinoComponent extends CApplicationComponent{
                     'parent', 
                 );
                 if(($radioControllerModel = Device::model()->find($criteria)) !== null){
-                    $ret = $this->recieve($radioControllerModel->id, substr($content, 3, 16));
+                    //var_dump($radioControllerModel->caption);
+                    $ret = $this->recieve($radioControllerModel->id, substr($ccontent, 4, 16));
                 } else{
-                    //print "not found\n";
+                    print "not found\n";
                 }
                 
             }
@@ -999,7 +1011,7 @@ class ArduinoComponent extends CApplicationComponent{
         var_dump(bin2hex($binCmd));
         
         try{
-            if(($fp = fopen($port, "w+")) !== null){
+            if(($fp = @fopen($port, "w+")) !== false){
                 //print "file open: {$port}\n";
                 fwrite($fp, $binCmd, 16);
                 fclose($fp);
